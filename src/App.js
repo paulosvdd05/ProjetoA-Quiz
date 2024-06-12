@@ -1,6 +1,7 @@
 
 import './styles/css/style.css';
-import { animacaoClick } from './scripts/animations';
+
+import Respostas from './components/Respostas';
 
 function App() {
   return (
@@ -21,21 +22,7 @@ function App() {
             <p>Qual é a capital do Brasil?</p>
           </div>
         </div>
-
-        <div className="respostas">
-          <div className="container container-resposta" id="resposta1">
-            <h2>São Paulo</h2>
-          </div>
-          <div className="container container-resposta" id="resposta2">
-            <h2>Rio de Janeiro</h2>
-          </div>
-          <div className="container container-resposta" id="resposta3">
-            <h2>Brasília</h2>
-          </div>
-          <div className="container container-resposta" id="resposta4">
-            <h2>Curitiba</h2>
-          </div>
-        </div>
+        <Respostas />
       </main>
     </div>
   );
