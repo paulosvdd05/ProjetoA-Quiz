@@ -13,7 +13,7 @@
 .container {
     @extend .noselect;
     background-color: variables.$color_white;
-    width: 90%;
+    width: 100%;
     margin: 15px auto;
     padding: 5;
     display: flex;
@@ -27,29 +27,30 @@
     transition: background-color 0.2s linear;
 
     & p {
-        @include mixin.breakpoint('medium') {
+        @include mixin.breakpoint('md') {
             font-size: 1.2rem;
         }
     }
 
     &.container-resposta {
-        width: 70%;
+        width: 50%;
         color: variables.$color_primary;
         border: 5px solid variables.$color_primary;
+        cursor: pointer;
 
         & h2 {
             font-size: 1.5rem;
             margin: 10px 0;
 
-            @include mixin.breakpoint('small') {
+            @include mixin.breakpoint('sm') {
                 font-size: 0.5rem;
             }
 
-            @include mixin.breakpoint('medium') {
-                font-size: 2rem;
+            @include mixin.breakpoint('md') {
+                font-size: 1rem;
             }
 
-            @include mixin.breakpoint('large') {
+            @include mixin.breakpoint('lg') {
                 font-size: 1.5rem;
             }
         }
@@ -75,4 +76,13 @@
             background-color: variables.$color_primary;
         }
     }
+}
+
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { animacaoClick } from '../scripts/animations.js';
 
+
 const initialState = {
+    btnHabilitado: false,
     respostas: [
         { id: 0, resposta: "São Paulo", correta: false, selecionada: false },
         { id: 1, resposta: "Rio de Janeiro", correta: false, selecionada: false },
@@ -19,12 +21,24 @@ export default class Respostas extends Component {
             respostas: prevState.respostas.map(
                 resposta => resposta.id === id ? { ...resposta, selecionada: true } : { ...resposta, selecionada: false }
             )
-        }));
+        }), () => {
+            console.warn(this.state.respostas)
+            this.verificarBotaoHabilitado();
+        });
     }
- 
 
-    classeResumo = (resposta) => {
-    
+    verificarBotaoHabilitado = () => {
+        if(this.state.respostas.filter(resposta => resposta.selecionada).length === 1){
+            this.setState({btnHabilitado: true})
+        } else {
+            this.setState({btnHabilitado: false})
+        }
+    }
+
+    confirmarResposta = () => {
+        if(this.state.btnHabilitado){
+            console.log("resposta confirmada")
+        }
     }
 
     renderizarRespostas = () => {
@@ -39,8 +53,11 @@ export default class Respostas extends Component {
 
     render() {
         return (
-            <div>
+            <div className='container'>
                 {this.renderizarRespostas()}
+                <button className={this.state.btnHabilitado ? "button button-habilitado" : "button"} onClick={this.confirmarResposta}>
+                    <p>Confirmar</p>
+                </button>
 
             </div>
         )

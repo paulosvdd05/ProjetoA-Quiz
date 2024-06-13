@@ -7,14 +7,14 @@ import Respostas from '../components/Respostas';
 function App() {
   return (
 
-    <div>
+    <div className='appContainer'>
       <header>
         <div>
           <h1>Quiz</h1>
         </div>
       </header>
 
-      <main>
+      <main style={{width:'80%'}}>
         <div className="container">
           <div className="quiz">
             <p><b>Questão 1</b></p>
@@ -28,5 +28,6 @@ function App() {
     </div>
   );
 }
+
 
 export default transicao(App);

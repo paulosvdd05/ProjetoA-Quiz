@@ -1,0 +1,39 @@
+@use "./variables.scss" as variables;
+@use "./common.scss" as common;
+@use "./mixin.scss" as mixin;
+
+.button {
+    background-color: variables.$color_grey;
+    color: variables.$color_white;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s linear;
+    margin-bottom: 10px;
+
+    
+
+    &.button-habilitado {
+        background-color: variables.$color_primary;
+        color: variables.$color_white;
+        border: 2px solid variables.$color_primary;
+        animation: animacaoClick 0.2s;
+        cursor: pointer;
+        &:hover {
+            background-color: darken(variables.$color_primary, 10%);
+        }
+        
+    }
+    
+    
+
+    &:active {
+        animation: none;
+    }
+    
+}

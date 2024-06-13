@@ -15,7 +15,7 @@ header {
     background-color: variables.$color_primary;
     padding: 5px;
     text-align: center;
-    width: 90%;
+    width: 80%;
     margin: 20px auto;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -25,14 +25,14 @@ header {
         color: white;
         font-size: 3em;
         font-family: 'Roboto Slab', serif;
-        @include mixin.breakpoint('small'){
-            font-size:1.5rem;
+        @include mixin.breakpoint('sm'){
+            font-size:1rem;
         }
-        @include mixin.breakpoint('medium') {
-            font-size: 3rem;
+        @include mixin.breakpoint('md') {
+            font-size: 1.5rem;
         }
 
-        @include mixin.breakpoint('large') {
+        @include mixin.breakpoint('lg') {
             font-size: 2.5rem;
         }
         
