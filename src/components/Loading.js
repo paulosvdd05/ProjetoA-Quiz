@@ -1,9 +1,11 @@
 import React from 'react';
+import { SyncLoader } from 'react-spinners';
 
 function Loading() {
   return (
     <div style={styles.container}>
       <h1 style={styles.textQuiz}>Quiz</h1>
+      <SyncLoader color="white" />
     </div>
   );
 }
@@ -11,6 +13,7 @@ function Loading() {
 const styles = {
   container: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',

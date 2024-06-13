@@ -1,5 +1,6 @@
 
 import '../styles/css/style.css';
+import transicao from '../components/Transicao';
 
 import Respostas from '../components/Respostas';
 
@@ -28,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default transicao(App);
