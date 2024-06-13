@@ -1,5 +1,6 @@
 @use "./variables.scss" as variables;
 @use "./mixin.scss" as mixin;
+@use "./common.scss" as common;
 
 body {
     background-color: variables.$color_off_white;
@@ -10,6 +11,7 @@ body {
 }
 
 header {
+    @extend .noselect;
     background-color: variables.$color_primary;
     padding: 5px;
     text-align: center;

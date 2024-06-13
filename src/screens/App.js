@@ -1,7 +1,7 @@
 
-import './styles/css/style.css';
+import '../styles/css/style.css';
 
-import Respostas from './components/Respostas';
+import Respostas from '../components/Respostas';
 
 function App() {
   return (
