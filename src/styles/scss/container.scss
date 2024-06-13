@@ -1,5 +1,6 @@
 @use "./mixin.scss" as mixin;
 @use "./variables.scss" as variables;
+@use "./common.scss" as common;
 
 @keyframes animacaoClick {
     100% { transform: scale(1); }
@@ -8,6 +9,7 @@
 }
 
 .container {
+    @extend .noselect;
     background-color: variables.$color_white;
     width: 90%;
     margin: 15px auto;
