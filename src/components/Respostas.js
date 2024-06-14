@@ -82,7 +82,7 @@ export default class Respostas extends Component {
         this.setState({ modal: { visivel: false } },
             () => {
                 if (this.state.acertou) {
-                    this.props.proximaPergunta();
+                    this.props.proximaPergunta(this.state.acertou);
                     this.setState(initialState)
                 }
             }
