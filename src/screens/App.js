@@ -3,6 +3,7 @@ import '../styles/css/style.css';
 import transicao from '../components/Transicao';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import perguntas from '../data/perguntas';
 
 import Respostas from '../components/Respostas';
 
@@ -32,10 +33,10 @@ function App() {
                 <p><b>Questão {nQuestao}</b></p>
               </div>
               <div className="pergunta">
-                <p>Qual é a capital do Brasil?</p>
+                <p>{perguntas[nQuestao-1].pergunta}</p>
               </div>
             </div>
-            <Respostas proximaPergunta={proximaPergunta}/>
+            <Respostas pergunta={perguntas[nQuestao - 1].pergunta} respostas={perguntas[nQuestao - 1].respostas} proximaPergunta={proximaPergunta} respostaCorreta={perguntas[nQuestao-1].respostas.filter( resposta => resposta.correta)} />
           </main>
         </div>
         {

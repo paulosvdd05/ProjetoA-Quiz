@@ -16,22 +16,37 @@ const initialState = {
         color: null,
         type: null
     },
-    respostas: [
-        { id: 0, resposta: "São Paulo", correta: false, selecionada: false },
-        { id: 1, resposta: "Rio de Janeiro", correta: false, selecionada: false },
-        { id: 2, resposta: "Brasília", correta: true, selecionada: false },
-        { id: 3, resposta: "Curitiba", correta: false, selecionada: false },
-    ]
+    respostas: []
 }
 
 export default class Respostas extends Component {
 
-    state = { ...initialState }
+    state = {
+        ...initialState,
+        perguntaNumero: this.props.perguntaNumero,
+        pergunta: this.props.pergunta,
+        respostas: this.props.respostas,
+        respostaCorreta: this.props.respostaCorreta[0].resposta,
+    }
 
-    animacaoClick = (id) => {
+    componentDidUpdate(prevProps) {
+        if (this.props.pergunta !== prevProps.pergunta ||
+            this.props.respostas !== prevProps.respostas ||
+            this.props.respostaCorreta !== prevProps.respostaCorreta) {
+            this.setState({
+                pergunta: this.props.pergunta,
+                respostas: this.props.respostas,
+                respostaCorreta: this.props.respostaCorreta[0].resposta,
+            });
+        }
+    }
+
+
+
+    animacaoClick = (indexClicado) => {
         this.setState(prevState => ({
             respostas: prevState.respostas.map(
-                resposta => resposta.id === id ? { ...resposta, selecionada: true } : { ...resposta, selecionada: false }
+                (resposta, index) => indexClicado == index? { ...resposta, selecionada: true } : { ...resposta, selecionada: false }
             )
         }), () => {
             console.warn(this.state.respostas)
@@ -50,11 +65,13 @@ export default class Respostas extends Component {
     confirmarResposta = () => {
 
         if (this.state.btnHabilitado) {
+            console.log();
             if (this.state.respostas.filter(resposta => resposta.selecionada)[0].resposta == this.state.respostaCorreta) {
+                
                 this.setState({ acertou: true }, () => {
                     this.setState({ modal: { visivel: true, titulo: 'Parabéns!', mensagem: 'Resposta correta!', color: '#00e800', type: 'correct' } })
                 });
-            }else {
+            } else {
                 this.setState({ modal: { visivel: true, titulo: 'Você errou!', mensagem: 'tente novamente...', color: '#FF0000', type: 'incorrect' } })
             }
 
@@ -64,8 +81,9 @@ export default class Respostas extends Component {
     onClose = () => {
         this.setState({ modal: { visivel: false } },
             () => {
-                if(this.state.acertou){
+                if (this.state.acertou) {
                     this.props.proximaPergunta();
+                    this.setState(initialState)
                 }
             }
         )
@@ -74,7 +92,7 @@ export default class Respostas extends Component {
     renderizarRespostas = () => {
         return this.state.respostas.map((resposta, index) => {
             return (
-                <div onClick={() => this.animacaoClick(resposta.id)} key={index} className={`container container-resposta ${resposta.selecionada ? 'animacao-click clicked' : ''}`} id={`resposta${resposta.id}`}>
+                <div onClick={() => this.animacaoClick(index)} key={index} className={`container container-resposta ${resposta.selecionada ? 'animacao-click clicked' : ''}`} id={`resposta${resposta.id}`}>
                     <h2>{resposta.resposta}</h2>
                 </div>
             )
