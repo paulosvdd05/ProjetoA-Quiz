@@ -10,11 +10,32 @@
     padding: 2px 20px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.2s linear;
     margin-bottom: 10px;
+
+
+
+    p{
+        @include mixin.breakpoint('lg') {
+            font-size: 1rem;
+        }
+    
+        @include mixin.breakpoint('md') {
+            font-size: 1rem;
+        }
+        
+        @include mixin.breakpoint('sm') {
+            font-size: 0.8rem;
+        }
+    }
+    
+
+    
+
+
+
 
     
 

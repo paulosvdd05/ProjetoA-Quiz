@@ -1,5 +1,6 @@
 import React from 'react';
 import { SyncLoader } from 'react-spinners';
+import transicao from './Transicao';
 
 function Loading() {
   return (
@@ -27,4 +28,4 @@ const styles = {
   }
 };
 
-export default Loading;
+export default transicao(Loading);

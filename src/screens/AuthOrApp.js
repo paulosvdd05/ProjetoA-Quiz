@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+
 import { CSSTransition } from 'react-transition-group';
 
 import transicao from '../components/Transicao';
@@ -36,6 +37,7 @@ function AuthOrApp() {
      <AnimatePresence mode='await'>
          <Routes>
         <Route path="/" element={isLoggedIn ? <App /> : <Login />} />
+       
       </Routes>
      </AnimatePresence>
     
