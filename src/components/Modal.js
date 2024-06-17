@@ -3,7 +3,7 @@
     import { alpha } from '@mui/system';
     import {Cancel, CheckCircle  } from '@mui/icons-material';
 
-    function Modal({ open, onClose, title, message, color, type }) {
+    function Modal({ open, onClose, title, message, color, type, questaoCorreta }) {
     return (
         <Dialog 
         PaperProps={{ 
@@ -19,9 +19,10 @@
            {type == 'correct' ?  <CheckCircle width='100%' style={{ color: color, fontSize: 50 }} /> : <Cancel width='100%' style={{ color: color, fontSize: 50 }} />}
         </Box>
          
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle style={{fontWeight:'bold'}}>{title}</DialogTitle>
         <DialogContent>
-            <Typography>{message}</Typography>
+            <Typography >{message}</Typography>
+            {type == 'incorrect' && <Typography style={{ marginTop: 10 }}>Resposta correta: {questaoCorreta}</Typography>}
         </DialogContent>
         <DialogActions>
             <Box textAlign='center' width='100%'>

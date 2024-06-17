@@ -69,10 +69,10 @@ export default class Respostas extends Component {
             if (this.state.respostas.filter(resposta => resposta.selecionada)[0].resposta == this.state.respostaCorreta) {
                 
                 this.setState({ acertou: true }, () => {
-                    this.setState({ modal: { visivel: true, titulo: 'Parabéns!', mensagem: 'Resposta correta!', color: '#00e800', type: 'correct' } })
+                    this.setState({ modal: { visivel: true, titulo: 'Parabéns!', mensagem: 'Resposta correta.', color: '#00e800', type: 'correct' } })
                 });
             } else {
-                this.setState({ modal: { visivel: true, titulo: 'Você errou!', mensagem: 'tente novamente...', color: '#FF0000', type: 'incorrect' } })
+                this.setState({ modal: { visivel: true, titulo: 'Você errou!', mensagem: 'Resposta incorreta.', color: '#dd0000', type: 'incorrect' } })
             }
 
         }
@@ -102,7 +102,7 @@ export default class Respostas extends Component {
     render() {
         return (
             <div className='container'>
-                <Modal open={this.state.modal.visivel} onClose={this.onClose} title={this.state.modal.titulo} message={this.state.modal.mensagem} color={this.state.modal.color} type={this.state.modal.type} />
+                <Modal open={this.state.modal.visivel} onClose={this.onClose} title={this.state.modal.titulo} message={this.state.modal.mensagem} color={this.state.modal.color} type={this.state.modal.type} questaoCorreta={this.state.respostaCorreta} />
                 {this.renderizarRespostas()}
                 <button className={this.state.btnHabilitado ? "button button-habilitado" : "button"} onClick={this.confirmarResposta}>
                     <p>Confirmar</p>
