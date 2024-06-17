@@ -4,39 +4,46 @@ import transicao from '../components/Transicao';
 import { useNavigate } from 'react-router-dom';
 import { m, motion } from 'framer-motion';
 import perguntas from '../data/perguntas';
-
 import Respostas from '../components/Respostas';
 
 function App() {
 
-  const questaoRandom = Math.floor(Math.random() * perguntas.length) + 1;
+  const [maxQuestoes, setMaxQuestoes] = useState(2);
   const [numeroQuestao, setNumeroQuestao] = useState(1);
   const [questao, setQuestao] = useState(Math.floor(Math.random() * perguntas.length));
   const [questoesRespondidas, setQuestoesRespondidas] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (questoesRespondidas.length === 0) {
-        setQuestao(questao);
-        setQuestoesRespondidas([...questoesRespondidas, questao]);
+      setQuestao(questao);
     } else {
-        let numeroRandom;
-        do {
-            numeroRandom = Math.floor(Math.random() * perguntas.length);
-        } while (questoesRespondidas.includes(numeroRandom) && questoesRespondidas.length < perguntas.length);
-
-        if (questoesRespondidas.length < perguntas.length) {
-            setQuestao(numeroRandom);
-            setQuestoesRespondidas([...questoesRespondidas, numeroRandom]);
-        } else {
-            console.log('All questions have been answered');
-        }
+      let numeroRandom;
+      do {
+        numeroRandom = Math.floor(Math.random() * perguntas.length);
+      } while (questoesRespondidas.map(q => q.questao).includes(numeroRandom) && questoesRespondidas.length < perguntas.length);
+  
+      if (questoesRespondidas.length < perguntas.length) {
+        setQuestao(numeroRandom);
+      } else {
+        console.log('Todas questões disponiveis ja foram respondidas.');
+      }
     }
+  
 
-    console.log(questoesRespondidas);
-}, [numeroQuestao]);
+  }, [questoesRespondidas]);
 
-  const proximaPergunta = (acertou) => {
-    setNumeroQuestao(prevState => prevState + 1);
+  const proximaPergunta =  (acertou) => {
+    setQuestoesRespondidas(prevQuestoes => {
+      const novasQuestoes = [...prevQuestoes, {questao: questao, acertou: acertou}];
+      if(novasQuestoes.length == maxQuestoes){
+        navigate('/fim', { state: { questoesRespondidas: novasQuestoes }});
+      }else{
+        setNumeroQuestao(prevState => prevState + 1);
+      }
+      return novasQuestoes;
+    });
   }
 
   const appContainer = () => {
@@ -52,7 +59,7 @@ function App() {
           <main style={{ width: '80%' }}>
             <div className="container">
               <div className="quiz">
-                <p><b>Questão {questao}</b></p>
+                <p><b>Questão {numeroQuestao}</b></p>
               </div>
               <div className="pergunta">
                 <p>{perguntas[questao].pergunta}</p>

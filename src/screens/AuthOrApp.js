@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import App from '../screens/App';
 import Login from './Login';
 import { AnimatePresence } from 'framer-motion';
+import Fim from './Fim';
 
 
 function AuthOrApp() {
@@ -37,7 +38,7 @@ function AuthOrApp() {
      <AnimatePresence mode='await'>
          <Routes>
         <Route path="/" element={isLoggedIn ? <App /> : <Login />} />
-       
+        <Route path="/fim" element={<Fim />} />
       </Routes>
      </AnimatePresence>
     

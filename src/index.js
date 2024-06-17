@@ -6,6 +6,7 @@ import AuthOrApp from './screens/AuthOrApp';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {motion} from 'framer-motion'; 
+import Fim from './screens/Fim';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<AuthOrApp />} />
+        <Route path="/fim" element={<Fim />} />
       </Routes>
     </Router>
     

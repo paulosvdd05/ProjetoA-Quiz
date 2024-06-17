@@ -81,10 +81,10 @@ export default class Respostas extends Component {
     onClose = () => {
         this.setState({ modal: { visivel: false } },
             () => {
-                if (this.state.acertou) {
+                
                     this.props.proximaPergunta(this.state.acertou);
                     this.setState(initialState)
-                }
+                
             }
         )
     }
