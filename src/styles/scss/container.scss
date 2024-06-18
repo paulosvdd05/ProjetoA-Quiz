@@ -92,6 +92,15 @@
             animation: animacaoClick 0.2s;
             background-color: variables.$color_primary;
         }
+
+        &.container-resposta-correta{
+            background-color: variables.$color_secondary;
+            border-color: darken(variables.$color_secondary, 35%);
+        }
+        &.container-resposta-incorreta{
+            background-color: variables.$color_quaternary;
+            border-color: darken(variables.$color_quaternary, 35%);
+        }
     }
 
     &.container-questaoResultado {

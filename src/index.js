@@ -15,6 +15,7 @@ root.render(
       <Routes>
         <Route path="/" element={<AuthOrApp />} />
         <Route path="/fim" element={<Fim />} />
+        <Route path="/app" element={<App />} />
       </Routes>
     </Router>
     

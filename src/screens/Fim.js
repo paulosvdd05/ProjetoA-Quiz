@@ -44,7 +44,8 @@ function Fim() {
 
     const gerarQuestoesResultado = () => {
         return location.state.questoesRespondidas.map((questao, index) => {
-            return <QuestaoResultadoFim key={index} questaoNumero={index + 1} questao={questao} />
+            
+            return <QuestaoResultadoFim  key={index} questaoNumero={index + 1} questao={questao} respostaSelecionada={location.state.respostaSelecionada} />
         })
     }
 

@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/css/style.css';
 import transicao from '../components/Transicao';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { m, motion } from 'framer-motion';
 import perguntas from '../data/perguntas';
 import Respostas from '../components/Respostas';
 
 function App() {
 
-  const [maxQuestoes, setMaxQuestoes] = useState(4);
+  const [maxQuestoes, setMaxQuestoes] = useState(7);
   const [numeroQuestao, setNumeroQuestao] = useState(1);
   const [questao, setQuestao] = useState(Math.floor(Math.random() * perguntas.length));
   const [questoesRespondidas, setQuestoesRespondidas] = useState([]);
+  const [correcaoResposta, setCorrecaoResposta] = useState(false);
+  const [respostaSelecionda, setRespostaSelecionada] = useState(null);
+  
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  
 
   useEffect(() => {
-    if (questoesRespondidas.length === 0) {
+    if(location.state && location.state.questaoNavegacao != null){
+      setCorrecaoResposta(true);
+      setRespostaSelecionada(location.state.questaoNavegacao.respostaSelecionada)
+      setNumeroQuestao(location.state.questaoNumero)
+      console.log(questao);
+      setQuestao(location.state.questaoNavegacao.questao)
+    }else if (questoesRespondidas.length === 0) {
       setQuestao(questao);
     } else {
       let numeroRandom;
@@ -34,11 +46,14 @@ function App() {
 
   }, [questoesRespondidas]);
 
-  const proximaPergunta = (acertou) => {
+  const proximaPergunta = (acertou, respostaSelecionada) => {
+
+ 
+
     setQuestoesRespondidas(prevQuestoes => {
-      const novasQuestoes = [...prevQuestoes, { questao: questao, acertou: acertou }];
+      const novasQuestoes = [...prevQuestoes, { questao: questao, acertou: acertou, respostaSelecionada:respostaSelecionada}];
       if (novasQuestoes.length == maxQuestoes) {
-        navigate('/fim', { state: { questoesRespondidas: novasQuestoes } });
+        navigate('/fim', { state: { questoesRespondidas: novasQuestoes, respostaSelecionada: respostaSelecionada } });
       } else {
         setNumeroQuestao(prevState => prevState + 1);
       }
@@ -65,7 +80,10 @@ function App() {
                 <p>{perguntas[questao].pergunta}</p>
               </div>
             </div>
-            <Respostas pergunta={perguntas[questao].pergunta} respostas={perguntas[questao].respostas} proximaPergunta={proximaPergunta} respostaCorreta={perguntas[questao].respostas.filter(resposta => resposta.correta)} style={{ margin: '10px 0' }} />
+            
+            <Respostas navigate={navigate} correcaoResposta={correcaoResposta} respostaSelecionada={respostaSelecionda} pergunta={perguntas[questao].pergunta} respostas={perguntas[questao].respostas} proximaPergunta={proximaPergunta} respostaCorreta={perguntas[questao].respostas.filter(resposta => resposta.correta)} style={{ margin: '10px 0' }} />
+          
+           
           </main>
         </div>
         {
