@@ -8,7 +8,7 @@ import Respostas from '../components/Respostas';
 
 function App() {
 
-  const [maxQuestoes, setMaxQuestoes] = useState(7);
+  const [maxQuestoes, setMaxQuestoes] = useState(5);
   const [numeroQuestao, setNumeroQuestao] = useState(1);
   const [questao, setQuestao] = useState(Math.floor(Math.random() * perguntas.length));
   const [questoesRespondidas, setQuestoesRespondidas] = useState([]);
@@ -72,7 +72,7 @@ function App() {
           </header>
 
           <main>
-            <div className="container" style={{ flex: 1, margin: '10px 0' }}>
+            <div className="container" style={{ flex: 1, margin: '10px 0', justifyContent:'center' }}>
               <div className="quiz">
                 <p><b>Questão {numeroQuestao}</b></p>
               </div>
